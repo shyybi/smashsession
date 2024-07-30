@@ -13,7 +13,7 @@ function App() {
 
         <div className='flex flex-row space-x-44 '>
           <img src={moon} alt='moon' className='size-8'/>
-          <button className='bg-gray-300 px-7 rounded-xl drop-shadow-lg'>Se Connecter</button>
+          <button className='bg-gray-200 px-7 rounded-xl drop-shadow-lg'>Se Connecter</button>
         </div>
       </header>
       {/* La partie ou y a les filtres a gauche et les sessions a droite */}
