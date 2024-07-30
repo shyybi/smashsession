@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import './Assets/moon.png' 
 const moon = require('./Assets/moon.png')
 const searchico = require('./Assets/search-interface-symbol.png')
 function App() {
+  const [distance, setDistance] = useState(50); // Valeur initiale à 50
+
+  const handleDistanceChange = (event) => {
+    setDistance(event.target.value);
+  };
   return (
     // ne pas utiliser <a></a> pour les paragraphes.
 
@@ -19,45 +24,67 @@ function App() {
         
         <div className='flex flex-row space-x-44 '>
           <img src={moon} alt='moon' className='size-8'/>
-          <button className='bg-gray-300 px-7 rounded-xl drop-shadow-lg'>Se Connecter</button>
+          <button className='bg-gray-200 px-7 rounded-xl drop-shadow-lg'>Se Connecter</button>
         </div>
       </header>
       {/* La partie ou y a les filtres a gauche et les sessions a droite */}
-      <div>  
+      <div class="m-8 w-1/6" >  
         <div>
           <p>Filtres de recherche</p>
-          <div>
-            <p>Jeu</p>
-            <select name='jeu'>
-              <option value='ultimate'>Smash Ultimate</option>
-              <option value='hdr'>Smash HDR</option>
-              <option value='hdr'>Sm4sh</option>
-              <option value='brawl'>Smash Brawl</option>
-              <option value='melee'>Smash Melee</option>
-            </select>
-            <p>Distance</p>
+          <br />
+          <div class="flex flex-col gap-8"> 
             <div>
-              <input type='range'></input>
-              <div className='flex flex-row '>
-                <p>0 km</p>
-                <p>100 km</p>
+              <p>Jeu</p>
+              <select name='jeu' class="bg-gray-200 rounded-lg p-3 w-full ">
+                <option value='ultimate'>Smash Ultimate</option>
+                <option value='hdr'>Smash HDR</option>
+                <option value='hdr'>Sm4sh</option>
+                <option value='brawl'>Smash Brawl</option>
+                <option value='melee'>Smash Melee</option>
+
+              </select>
+            </div>
+            <div>
+              <div className='flex flex-row space-x-1'>
+                <p>Distance : </p>
+                <output> {distance} km</output>
+              </div>
+              
+              <div>
+                <input 
+                  type='range' 
+                  min="0" 
+                  max="100" 
+                  value={distance} 
+                  onChange={handleDistanceChange} 
+                  className='w-full'
+                />
+                
+                <div className='flex flex-row justify-between'>
+                  <p>0 km</p>
+                  <p>100 km</p>
+                </div>
               </div>
             </div>
-            <div className='flex flex-row space-x-4'>
+            <div>
               <p>Afficher les sessions pleines</p>
               <input type='checkbox'></input>
             </div>
-            
-            <p>Horaire</p>
-            <input type='datetime-local'></input>
-            <p>Niveau</p>
-            <select name='niveau'>
-              <option value='debutant'>Débutant</option>
-              <option value='intermediaire'>Intermédiaire</option>
-              <option value='expert'>Expert</option>
-            </select>
+            <div>
+              <p>Horaire</p>
+              <input type='datetime-local' class="bg-gray-200 rounded-lg p-3 w-full "></input>
+            </div>
+            <div>
+              <p>Niveau</p>
+              <select name='niveau' class="bg-gray-200 rounded-lg p-3 w-full ">
+                <option value='debutant'>Débutant</option>
+                <option value='intermediaire'>Intermédiaire</option>
+                <option value='expert'>Expert</option>
+              </select>
+            </div>
           </div>
         </div>
+        <br />
         {/* Petit espace pour pas se perdre */}
         <div>
           <p>Sessions proche</p>
