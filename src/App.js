@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import './Assets/moon.png' 
 const moon = require('./Assets/moon.png')
 const searchico = require('./Assets/search-interface-symbol.png')
 function App() {
+  const [distance, setDistance] = useState(50); // Valeur initiale à 50
+
+  const handleDistanceChange = (event) => {
+    setDistance(event.target.value);
+  };
   return (
     // ne pas utiliser <a></a> pour les paragraphes.
 
@@ -40,10 +45,22 @@ function App() {
               </select>
             </div>
             <div>
-              <p>Distance</p>
+              <div className='flex flex-row space-x-1'>
+                <p>Distance : </p>
+                <output> {distance} km</output>
+              </div>
+              
               <div>
-                <input type='range'></input>
-                <div className='flex flex-row '>
+                <input 
+                  type='range' 
+                  min="0" 
+                  max="100" 
+                  value={distance} 
+                  onChange={handleDistanceChange} 
+                  className='w-full'
+                />
+                
+                <div className='flex flex-row justify-between'>
                   <p>0 km</p>
                   <p>100 km</p>
                 </div>
