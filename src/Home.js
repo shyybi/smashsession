@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom'; // Ajout de useNavigate pour la redirection
+import { Link, useNavigate } from 'react-router-dom'; 
 
 import './App.css';
-import './Assets/moon.png';
 const moon = require('./Assets/moon.png');
 const searchico = require('./Assets/search-interface-symbol.png');
 
-function Home() {
-    const [user, setUser] = useState(null);
+function Home({ user, setUser }) {
     const [distance, setDistance] = useState(50);
-    const navigate = useNavigate(); // Initialisation de useNavigate
+    const navigate = useNavigate();
 
     useEffect(() => {
         const urlParams = new URLSearchParams(window.location.search);
@@ -19,10 +17,16 @@ function Home() {
                 .then(response => response.json())
                 .then(data => {
                     setUser(data);
-                    navigate('/'); // Redirection vers la page d'accueil
+                    localStorage.setItem('user', JSON.stringify(data));
+                    navigate('/');
                 });
+        } else {
+            const storedUser = localStorage.getItem('user');
+            if (storedUser) {
+                setUser(JSON.parse(storedUser));
+            }
         }
-    }, [navigate]);
+    }, [navigate, setUser]);
 
     const handleLogin = () => {
         window.location.href = 'http://localhost:5000/oauth/discord';
@@ -58,7 +62,7 @@ function Home() {
                     )}
                 </div>
             </header>
-            <div className="m-8 w-1/6">
+            <div className="m-8 w-1/6 h-screen">
                 <div>
                     <p>Filtres de recherche</p>
                     <br />
@@ -111,7 +115,7 @@ function Home() {
                         </div>
                     </div>
                 </div>
-                <br />
+                {/* Separation */}
                 <div>
                     <p>Sessions proche</p>
                 </div>
