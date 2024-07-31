@@ -38,16 +38,16 @@ function Home({ user, setUser }) {
 
     return (
         <div>
-            <header id='App-Header' className='flex flex-row justify-around mt-3 '>
-                <p className='text-lg mt-2'>NaetorUSmash</p>
+            <header id='App-Header' className='flex flex-row justify-evenly mt-3 '>
+                <p className='text-xl mt-2 ml-8 mr-4'>NaetorUSmash</p>
                 <div className='flex flex-row w-7/12 bg-gray-300 rounded-xl pl-2'>
                     <button type='submit' className='size-8 mt-1 pr-3'>
                         <img src={searchico} alt='moon' />
                     </button>
                     <input type='text' placeholder='Recherche par joueurs / régions' className='bg-gray-300 text-black rounded-xl h-10 w-full pl-2 ' />
                 </div>
-                <div className='flex flex-row space-x-44 '>
-                    <img src={moon} alt='moon' className='size-8' />
+                <div className='flex flex-row'>
+                    <img src={moon} alt='moon' className='size-8 mt-1 mr-5' />
                     {user ? (
                         <Link to="/profile">
                             <div className='flex flex-row-reverse '>
@@ -56,7 +56,7 @@ function Home({ user, setUser }) {
                             </div>
                         </Link>
                     ) : (
-                        <button onClick={handleLogin} className='bg-gray-200 px-7 rounded-xl drop-shadow-lg'>
+                        <button onClick={handleLogin} className='bg-gray-200 px-7 rounded-xl drop-shadow-lg ml-20 transition-all transform hover:bg-gray-300'>
                             Se Connecter
                         </button>
                     )}
@@ -64,13 +64,13 @@ function Home({ user, setUser }) {
             </header>
             <div className="m-8 w-10/12">
                 <div className='flex flox-row'>
-                    <div className='w-72'>
-                        <p>Filtres de recherche</p>
+                    <div className='w-1/5'>
+                        <p className='text-lg'>Filtres de recherche :</p>
                         <br />
                         <div className="flex flex-col gap-8">
                             <div>
                                 <p>Jeu</p>
-                                <select name='jeu' className="bg-gray-200 rounded-lg p-3 w-full ">
+                                <select name='jeu' className="bg-gray-200 rounded-lg p-3 w-full transition-all transform hover:bg-gray-300">
                                     <option value='ultimate'>Smash Ultimate</option>
                                     <option value='hdr'>Smash HDR</option>
                                     <option value='sm4sh'>Sm4sh</option>
@@ -98,23 +98,23 @@ function Home({ user, setUser }) {
                                     </div>
                                 </div>
                             </div>
-                            <div>
+                            <div className='flex flex-row justify-around'>
                                 <p>Afficher les sessions pleines</p>
                                 <input type='checkbox'></input>
                             </div>
                             <div>
                                 <p>Horaire</p>
-                                <input type='datetime-local' className="bg-gray-200 rounded-lg p-3 w-full "></input>
+                                <input type='datetime-local' className="bg-gray-200 rounded-lg p-3 w-full transition-all transform hover:bg-gray-300"></input>
                             </div>
                             <div>
                                 <p>Niveau</p>
-                                <select name='niveau' className="bg-gray-200 rounded-lg p-3 w-full ">
+                                <select name='niveau' className="bg-gray-200 rounded-lg p-3 w-full transition-all transform hover:bg-gray-300">
                                     <option value='debutant'>Débutant</option>
                                     <option value='intermediaire'>Intermédiaire</option>
                                     <option value='expert'>Expert</option>
                                 </select>
                             </div>
-                            <div className='flex flex-col justify-center align-bottom h-96 '>
+                            <div className='flex flex-col text-lg justify-center align-bottom mt-24 h-auto'>
                                 <p>Credits</p>
                                 <p>Coditions d'utilisation</p>
                                 <p>Contacts</p>
@@ -123,21 +123,18 @@ function Home({ user, setUser }) {
                     </div>
                     {/* Separation */}
                     <div className='flex flex-col ml-10'>
-                        <div className='flex flex-row space'>
-                            <p>Sessions proche de chez moi</p>
-                            <button className='bg-gray-200 px-7 rounded-xl drop-shadow-lg'>
+                        <div className='flex flex-row'>
+                            <p className='text-lg mr-10'>Sessions proche de chez moi</p>
+                            <button className='bg-gray-200 px-7 rounded-xl drop-shadow-lg transition-all transform hover:bg-gray-300'>
                                 Creer une sessions
                             </button>
                             <div>
 
                             </div>
                         </div>
-
                     </div>
                 </div>
-                <p>a </p>
             </div>
-
         </div>
     );
 }
