@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import Tooltip from 'react-tooltip-lite';
-import { Link, useNavigate } from 'react-router-dom'; 
+import { Link, useNavigate } from 'react-router-dom';
+import sun from './Assets/sun.svg';
+import moon from './Assets/moon.svg';
+import searchico from './Assets/search-interface-symbol.png';
+import { useTheme } from './common/ThemeContext';
 import './App.css';
 
-
-const moon = require('./Assets/moon.png');
-const searchico = require('./Assets/search-interface-symbol.png');
-
 function Home({ user, setUser }) {
+    const { theme, toggleTheme } = useTheme();
+    const themeIcon = theme === 'light' ? sun : moon;
     const [distance, setDistance] = useState(50);
     const navigate = useNavigate();
 
@@ -38,30 +40,24 @@ function Home({ user, setUser }) {
         setDistance(event.target.value);
     };
 
-    const [tooltipText, setTooltipText] = useState('Accedez a votre profil');
-
-    const handleClick = () => { 
-        setTooltipText('Accedez a votre profil');
-    }
-
-
     return (
         <div>
-            <header id='App-Header' className='flex flex-row justify-evenly mt-3 '>
+            <header id='App-Header' className='flex flex-row justify-evenly mt-3'>
                 <p className='text-xl mt-2 ml-8 mr-4'>NaetorUSmash</p>
                 <div className='flex flex-row w-7/12 bg-gray-300 rounded-xl pl-2'>
                     <button type='submit' className='size-8 mt-1 pr-3'>
-                        <img src={searchico} alt='moon' />
+                        <img src={searchico} alt='search icon' />
                     </button>
-                    <input type='text' placeholder='Recherche par joueurs / régions' className='bg-gray-300 text-black rounded-xl h-10 w-full pl-2 ' />
+                    <input type='text' placeholder='Recherche par joueurs / régions' className='bg-gray-300 text-black rounded-xl h-10 w-full pl-2' />
                 </div>
-                <img src={moon} alt='moon' className='size-8 mt-1 mr-5'/>
+                <button onClick={toggleTheme} className='flex items-center'>
+                    <img src={themeIcon} alt='Theme icon' className='size-8 mt-1 mr-5' />
+                </button>
                 <div className='flex flex-row'>
-                    
                     {user ? (
                         <Link to="/profile">
-                            <Tooltip content={tooltipText} direction="down" tagName="span" className="tooltip ">
-                                <div className='flex flex-row-reverse '>
+                            <Tooltip content="Accedez à votre profil" direction="down" tagName="span" className="tooltip">
+                                <div className='flex flex-row-reverse'>
                                     <img src={`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`} alt='Discord Profile' className='rounded-full w-10 h-10' />
                                     <span className='mt-2 mr-2'>{user.global_name}</span>
                                 </div>
@@ -75,8 +71,8 @@ function Home({ user, setUser }) {
                 </div>
             </header>
             <div className="m-8 w-10/12">
-                <div className='flex flox-row'>
-                    <div className='w-1/5 '>
+                <div className='flex flex-row'>
+                    <div className='w-1/5'>
                         <p className='text-lg'>Filtres de recherche :</p>
                         <br />
                         <div className="flex flex-col gap-8">
@@ -92,7 +88,7 @@ function Home({ user, setUser }) {
                             </div>
                             <div>
                                 <div className='flex flex-row space-x-1'>
-                                    <p>Distance : </p>
+                                    <p>Distance :</p>
                                     <output>{distance} km</output>
                                 </div>
                                 <div>
@@ -128,7 +124,7 @@ function Home({ user, setUser }) {
                             </div>
                             <div className='flex flex-col text-lg justify-center align-bottom mt-24 h-auto'>
                                 <p>Credits</p>
-                                <p>Coditions d'utilisation</p>
+                                <p>Conditions d'utilisation</p>
                                 <p>Contacts</p>
                             </div>
                         </div>
@@ -137,11 +133,11 @@ function Home({ user, setUser }) {
                     <div className='flex flex-col ml-10 w-10/12'>
                         <div className='flex flex-col w-full'>
                             <div className='flex flex-row justify-between w-full'>
-                                <p className='text-lg mr-10'>Sessions proche de chez moi</p>
-                                <button className='bg-gray-200 px-7 rounded-xl drop-shadow-lg transition-all transform hover:bg-gray-300 '>
-                                    <Link to="/create">Creer une sessions</Link>
+                                <p className='text-lg mr-10'>Sessions proches de chez moi</p>
+                                <button className='bg-gray-200 px-7 rounded-xl drop-shadow-lg transition-all transform hover:bg-gray-300'>
+                                    <Link to="/create">Créer une session</Link>
                                 </button>
-                            </div> 
+                            </div>
                             <div className='mt-14 h-screen'>
                                 <p>aa</p>
                             </div>
