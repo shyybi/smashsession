@@ -15,3 +15,6 @@ Seillemar
 GateauLune - https://x.com/gateaulune_  
 
 This project is an open source website allowing the creation of sessions for players from the smash bro community.
+
+To run the project, open 2 CLI   
+on the first run "npm start" and on the second "node src/backend/server,js"

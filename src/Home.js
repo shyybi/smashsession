@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import Tooltip from 'react-tooltip-lite';
 import { Link, useNavigate } from 'react-router-dom'; 
-
 import './App.css';
+
+
 const moon = require('./Assets/moon.png');
 const searchico = require('./Assets/search-interface-symbol.png');
 
@@ -36,6 +38,13 @@ function Home({ user, setUser }) {
         setDistance(event.target.value);
     };
 
+    const [tooltipText, setTooltipText] = useState('Accedez a votre profil');
+
+    const handleClick = () => { 
+        setTooltipText('Accedez a votre profil');
+    }
+
+
     return (
         <div>
             <header id='App-Header' className='flex flex-row justify-evenly mt-3 '>
@@ -46,14 +55,17 @@ function Home({ user, setUser }) {
                     </button>
                     <input type='text' placeholder='Recherche par joueurs / régions' className='bg-gray-300 text-black rounded-xl h-10 w-full pl-2 ' />
                 </div>
+                <img src={moon} alt='moon' className='size-8 mt-1 mr-5'/>
                 <div className='flex flex-row'>
-                    <img src={moon} alt='moon' className='size-8 mt-1 mr-5' />
+                    
                     {user ? (
                         <Link to="/profile">
-                            <div className='flex flex-row-reverse '>
-                                <img src={`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`} alt='Discord Profile' className='rounded-full w-10 h-10' />
-                                <span className='mt-2 mr-2'>{user.global_name}</span>
-                            </div>
+                            <Tooltip content={tooltipText} direction="down" tagName="span" className="tooltip ">
+                                <div className='flex flex-row-reverse '>
+                                    <img src={`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`} alt='Discord Profile' className='rounded-full w-10 h-10' />
+                                    <span className='mt-2 mr-2'>{user.global_name}</span>
+                                </div>
+                            </Tooltip>
                         </Link>
                     ) : (
                         <button onClick={handleLogin} className='bg-gray-200 px-7 rounded-xl drop-shadow-lg ml-20 transition-all transform hover:bg-gray-300'>
@@ -64,7 +76,7 @@ function Home({ user, setUser }) {
             </header>
             <div className="m-8 w-10/12">
                 <div className='flex flox-row'>
-                    <div className='w-1/5'>
+                    <div className='w-1/5 '>
                         <p className='text-lg'>Filtres de recherche :</p>
                         <br />
                         <div className="flex flex-col gap-8">
@@ -98,7 +110,7 @@ function Home({ user, setUser }) {
                                     </div>
                                 </div>
                             </div>
-                            <div className='flex flex-row justify-around'>
+                            <div className='flex flex-row justify-between'>
                                 <p>Afficher les sessions pleines</p>
                                 <input type='checkbox'></input>
                             </div>
@@ -122,14 +134,16 @@ function Home({ user, setUser }) {
                         </div>
                     </div>
                     {/* Separation */}
-                    <div className='flex flex-col ml-10'>
-                        <div className='flex flex-row'>
-                            <p className='text-lg mr-10'>Sessions proche de chez moi</p>
-                            <button className='bg-gray-200 px-7 rounded-xl drop-shadow-lg transition-all transform hover:bg-gray-300'>
-                                Creer une sessions
-                            </button>
-                            <div>
-
+                    <div className='flex flex-col ml-10 w-10/12'>
+                        <div className='flex flex-col w-full'>
+                            <div className='flex flex-row justify-between w-full'>
+                                <p className='text-lg mr-10'>Sessions proche de chez moi</p>
+                                <button className='bg-gray-200 px-7 rounded-xl drop-shadow-lg transition-all transform hover:bg-gray-300 '>
+                                    <Link to="/create">Creer une sessions</Link>
+                                </button>
+                            </div> 
+                            <div className='mt-14 h-screen'>
+                                <p>aa</p>
                             </div>
                         </div>
                     </div>
