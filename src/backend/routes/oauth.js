@@ -4,11 +4,8 @@ const router = express.Router();
 require('dotenv').config();
 
 const client_secret = process.env.CLIENT_SECRET;
-console.log('client_secret:', client_secret);
-const client_id = '1267839474046603265'; 
-const redirect_uri = 'http://localhost:3000/callback';
-
-console.log('redirect_uri:', redirect_uri);
+const client_id = "1267839474046603265";
+const redirect_uri = "http://localhost:3000/callback";
 
 router.get('/discord', (req, res) => {
   const discordAuthUrl = `https://discord.com/oauth2/authorize?client_id=1267839474046603265&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fcallback&scope=identify+connections`;
