@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from "react";
 import { Tooltip } from "react-tooltip";
 import { Link, useNavigate } from "react-router-dom";
 import sun from "./Assets/sun.svg";
@@ -7,31 +7,44 @@ import searchico from "./Assets/search-interface-symbol.png";
 import { useTheme } from "./common/ThemeContext";
 import "./App.css";
 import axios from "axios";
+import { attachToken, publicAxios } from "./api/privateAxiosInstance";
+import { useQueryClient } from "@tanstack/react-query";
+import { usersQueryKeys } from "./api/query-keys/users.query-keys";
+import { Loader } from "@mantine/core";
 
-function Home({ user, setUser }) {
+function Home({ user, isLoadingUser }) {
   const { theme, toggleTheme } = useTheme();
   const themeIcon = theme === "light" ? sun : moon;
   const [distance, setDistance] = useState(50);
   const navigate = useNavigate();
 
-  useEffect(() => {
+  const queryClient = useQueryClient();
+
+  const hasLocalStorageAccessToken = Boolean(
+    localStorage.getItem("accessToken")
+  );
+
+  const handleConnection = useCallback(async () => {
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get("code");
     if (code) {
-      fetch(`http://localhost:5000/discord/callback?code=${code}`)
-        .then((response) => response.json())
-        .then((data) => {
-          setUser(data);
-          localStorage.setItem("user", JSON.stringify(data));
-          navigate("/");
-        });
+      const { data } = await publicAxios.get(
+        `http://localhost:5000/discord/callback?code=${code}`
+      );
+      localStorage.setItem("accessToken", data);
+      attachToken(data);
+      navigate("/");
     } else {
-      const storedUser = localStorage.getItem("user");
-      if (storedUser) {
-        setUser(JSON.parse(storedUser));
+      if (localStorage.getItem("accessToken")) {
+        attachToken(localStorage.getItem("accessToken"));
       }
     }
-  }, [navigate, setUser]);
+    queryClient.refetchQueries(usersQueryKeys.me());
+  }, [navigate, queryClient]);
+
+  useEffect(() => {
+    handleConnection();
+  }, [handleConnection]);
 
   const handleLogin = async () => {
     const response = await axios.get("http://localhost:5000/discord");
@@ -59,8 +72,10 @@ function Home({ user, setUser }) {
         <button onClick={toggleTheme} className="flex items-center">
           <img src={themeIcon} alt="Theme icon" className="size-8 mt-1 mr-5" />
         </button>
-        <div className="flex flex-row">
-          {user ? (
+        <div className="flex flex-row items-center">
+          {isLoadingUser && hasLocalStorageAccessToken ? (
+            <Loader color="black" size="xs" />
+          ) : user ? (
             <Link to="/profile">
               <div
                 className="flex flex-row-reverse"

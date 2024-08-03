@@ -4,6 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useTheme } from "./common/ThemeContext";
 import sun from "./Assets/sun.svg";
 import moon from "./Assets/moon.svg";
+import { useQueryClient } from "@tanstack/react-query";
+import { usersQueryKeys } from "./api/query-keys/users.query-keys";
 
 function Profile({ user }) {
   const { theme, toggleTheme } = useTheme();
@@ -19,8 +21,11 @@ function Profile({ user }) {
     });
   };
 
+  const queryClient = useQueryClient();
+
   const Logout = () => {
-    localStorage.removeItem("user");
+    localStorage.removeItem("accessToken");
+    queryClient.refetchQueries(usersQueryKeys.me());
     navigate("/");
     window.location.reload();
   };
