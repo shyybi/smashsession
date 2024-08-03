@@ -74,7 +74,6 @@ function Home({ user, setUser }) {
                 />
                 <span className="mt-2 mr-2">{user.global_name}</span>
               </div>
-              <Tooltip id="avatar" place="bottom" />
             </Link>
           ) : (
             <button
@@ -170,6 +169,7 @@ function Home({ user, setUser }) {
           </div>
         </div>
       </div>
+      <Tooltip id="avatar" place="bottom" />
     </div>
   );
 }
