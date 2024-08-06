@@ -54,7 +54,6 @@ function Home({ user, isLoadingUser }) {
   const handleDistanceChange = (event) => {
     setDistance(event.target.value);
   };
-
   return (
     <div>
       <header id="App-Header" className="flex flex-row justify-evenly mt-3">
@@ -93,7 +92,7 @@ function Home({ user, isLoadingUser }) {
           ) : (
             <button
               onClick={handleLogin}
-              className="bg-gray-200 px-7 rounded-xl drop-shadow-lg ml-20 transition-all transform hover:bg-gray-300"
+              className="bg-gray-200 px-7 rounded-xl drop-shadow-lg ml-20 transition-all transform hover:bg-gray-300 h-11"
             >
               Se Connecter
             </button>
@@ -177,8 +176,30 @@ function Home({ user, isLoadingUser }) {
                   <Link to="/create">Créer une session</Link>
                 </button>
               </div>
-              <div className="mt-14 h-screen">
-                <p>aa</p>
+              <div className="flex  ml-20 h-auto w-full flex-row flex-wrap ">
+
+                <div className="bg-gray-300 rounded-xl mt-14 mr-4 h-56 w-96">
+                  <div className="ml-4">
+                    <div className="mt-2 ">
+                      {/*PFP */}
+                      <p>Neeroz</p>
+                    </div>
+                    <div className="mt-3">
+                      <p>Date et heure : 3 Aout 2024 | 14h à 18h</p>
+                      <p>Localisation : 2 Rue Paul Vaillant Couturier, 92300 Levallois-Perret</p>
+                      <p>Particpants : 3/6</p>
+                    </div>
+                    <div className="flex flex-row">
+                    <img src={searchico} className="size-3" alt="google map"></img>
+                    <p>Ouvrir dans google map</p>
+                  </div>
+                  </div>
+
+                  <div className="flex justify-end mr-4 ">
+                    <button className="bg-cyan-300 drop-shadow-lg px-4 py-0.5 rounded-lg hover:bg-cyan-400">S'inscrire</button>
+                  </div>
+                </div>
+                
               </div>
             </div>
           </div>
