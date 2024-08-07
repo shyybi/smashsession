@@ -18,9 +18,7 @@ function Home({ user, isLoadingUser }) {
   const themeIcon = theme === "light" ? sun : moon;
   const [distance, setDistance] = useState(50);
   const navigate = useNavigate();
-
   const queryClient = useQueryClient();
-
   const hasLocalStorageAccessToken = Boolean(
     localStorage.getItem("accessToken")
   );
@@ -55,22 +53,25 @@ function Home({ user, isLoadingUser }) {
   const handleDistanceChange = (event) => {
     setDistance(event.target.value);
   };
+
   return (
-    <div>
-      <header id="App-Header" className="flex flex-row justify-evenly mt-3">
-        <p className="text-xl mt-2 ml-8 mr-4">NaetorUSmash</p>
-        <div className="flex flex-row w-7/12 bg-gray-300 rounded-xl pl-2">
+    <div className= {theme === "light" ? "bg-white text-black" : "bg-[#1E1E1E] text-white"}>
+      <header id="App-Header" className="flex flex-row justify-evenly">
+        <p className={`text-xl mt-7 ml-8 mr-4 ${theme === "light" ? "text-black" : "text-white"}`}>
+          NaetorUSmash
+        </p>
+        <div className={`flex flex-row w-7/12 rounded-xl pl-2 mt-5 ${theme === "light" ? "bg-gray-300 text-black" : "bg-[#848484] text-white"}`}>
           <button type="submit" className="size-8 mt-1 pr-3">
             <img src={searchico} alt="search icon" />
           </button>
           <input
             type="text"
             placeholder="Recherche par joueurs / régions"
-            className="bg-gray-300 text-black rounded-xl h-10 w-full pl-2"
+            className={`rounded-xl h-10 w-full pl-2  ${theme === "light" ? "bg-gray-300 text-black placeholder-gray-500" : "bg-[#848484] text-white placeholder-white"}`}
           />
         </div>
         <button onClick={toggleTheme} className="flex items-center">
-          <img src={themeIcon} alt="Theme icon" className="size-8 mt-1 mr-5" />
+          <img src={themeIcon} alt="Theme icon" className="size-8 mt-6 mr-5" />
         </button>
         <div className="flex flex-row items-center">
           {isLoadingUser && hasLocalStorageAccessToken ? (
@@ -93,7 +94,7 @@ function Home({ user, isLoadingUser }) {
           ) : (
             <button
               onClick={handleLogin}
-              className="bg-gray-200 px-7 rounded-xl drop-shadow-lg ml-20 transition-all transform hover:bg-gray-300 h-11"
+              className={`px-7 rounded-xl drop-shadow-lg mt-5 ml-20  h-11 ${theme === "light" ? "bg-gray-200 hover:bg-gray-300" : "bg-[#848484] hover:bg-gray-600"}`}
             >
               Se Connecter
             </button>
@@ -110,7 +111,7 @@ function Home({ user, isLoadingUser }) {
                 <p>Jeu</p>
                 <select
                   name="jeu"
-                  className="bg-gray-200 rounded-lg p-3 w-full transition-all transform hover:bg-gray-300"
+                  className={`rounded-lg p-3 w-full ${theme === "light" ? "bg-gray-200 hover:bg-gray-300" : "bg-[#848484] hover:bg-gray-600"}`}
                 >
                   <option value="ultimate">Smash Ultimate</option>
                   <option value="hdr">Smash HDR</option>
@@ -120,7 +121,7 @@ function Home({ user, isLoadingUser }) {
                 </select>
               </div>
               <div>
-                <div className="flex flex-row space-x-1">
+                <div className={`flex flex-row space-x-1 ${theme === "dark" ? "text-white" : "text-black"}`}>
                   <p>Distance :</p>
                   <output>{distance} km</output>
                 </div>
@@ -131,9 +132,9 @@ function Home({ user, isLoadingUser }) {
                     max="100"
                     value={distance}
                     onChange={handleDistanceChange}
-                    className="w-full"
+                    className={`w-full ${theme === "light" ? "bg-white accent-blue" : "bg-[#848484] accent-[#848484]"}`}
                   />
-                  <div className="flex flex-row justify-between">
+                  <div className={`flex flex-row justify-between ${theme === "light" ? "text-black" : "text-white"}`}>
                     <p>0 km</p>
                     <p>100 km</p>
                   </div>
@@ -147,14 +148,14 @@ function Home({ user, isLoadingUser }) {
                 <p>Horaire</p>
                 <input
                   type="datetime-local"
-                  className="bg-gray-200 rounded-lg p-3 w-full transition-all transform hover:bg-gray-300"
+                  className={`rounded-lg p-3 w-full ${theme === "light" ? "bg-gray-200 hover:bg-gray-300" : "bg-[#848484] hover:bg-gray-600"}`}
                 ></input>
               </div>
               <div>
                 <p>Niveau</p>
                 <select
                   name="niveau"
-                  className="bg-gray-200 rounded-lg p-3 w-full transition-all transform hover:bg-gray-300"
+                  className={`rounded-lg p-3 w-full  ${theme === "light" ? "bg-gray-200 hover:bg-gray-300" : "bg-[#848484] hover:bg-gray-600"}`}
                 >
                   <option value="debutant">Débutant</option>
                   <option value="intermediaire">Intermédiaire</option>
@@ -173,46 +174,48 @@ function Home({ user, isLoadingUser }) {
             <div className="flex flex-col w-full">
               <div className="flex flex-row justify-between w-full">
                 <p className="text-lg mr-10">Sessions proches de chez moi</p>
-                <button className="bg-gray-200 px-7 rounded-xl drop-shadow-lg transition-all transform hover:bg-gray-300">
+                <button className={`px-7 rounded-xl drop-shadow-lg  ${theme === "light" ? "bg-gray-200 hover:bg-gray-300" : "bg-[#848484] hover:bg-gray-600"}`}>
                   <Link to="/create">Créer une session</Link>
                 </button>
               </div>
-              <div className="flex  ml-20 h-auto w-full flex-row flex-wrap ">
-
-                <div className="bg-gray-200 rounded-xl mt-14 mr-4 h-56 w-96">
+              <div className="flex ml-20 h-auto w-full flex-row flex-wrap">
+                <div className={`rounded-xl mt-14 mr-4 h-56 w-96 drop-shadow-lg ${theme === "light" ? "bg-gray-200 hover:bg-gray-300" : "bg-[#848484] hover:bg-gray-600"}`}>
                   <div className="ml-4">
-                    <div className="mt-2 ">
+                    <div className="mt-2">
                       {/*PFP */}
                       <p className="font-bold m-6">Neeroz</p>
                     </div>
                     <div className="mt-3">
-                      <div className="flex flex-row mb-1 leading-tight"> 
-                        <p className="font-semibold w-auto whitespace-nowrap mr-2">Date et heure :</p>
+                      <div className="flex flex-row mb-1 leading-tight">
+                        <p className="font-semibold w-auto whitespace-nowrap mr-2">
+                          Date et heure :
+                        </p>
                         <p>3 Aout 2024 | 14h à 18h</p>
                       </div>
-                      <div className="flex flex-row mb-1 leading-tight"> 
-                        <p className="font-semibold w-auto whitespace-nowrap mr-2">Adresse :</p>
+                      <div className="flex flex-row mb-1 leading-tight">
+                        <p className="font-semibold w-auto whitespace-nowrap mr-2">
+                          Adresse :
+                        </p>
                         <p>2 Rue Paul Vaillant Couturier, 92300 Levallois-Perret</p>
                       </div>
-                      <div className="flex flex-row mb-1 leading-tight"> 
-                        <p className="font-semibold w-auto whitespace-nowrap mr-2">Particpants :</p>
+                      <div className="flex flex-row mb-1 leading-tight">
+                        <p className="font-semibold w-auto whitespace-nowrap mr-2">
+                          Particpants :
+                        </p>
                         <p>3/6</p>
                       </div>
                     </div>
                     <div className="flex flex-row mt-3 ml-3">
-                      <img
-                        className="w-6 h-6"
-                        src={google_maps}
-                      />
+                      <img className="w-6 h-6" src={google_maps} alt="Google Maps" />
                       <p>Ouvrir dans google map</p>
                       <div className="w-auto mt-1 ml-8">
-                        <button className="bg-cyan-200 drop-shadow-lg px-4 py-0.5 rounded-lg hover:bg-cyan-400">S'inscrire</button>
+                        <button className="bg-cyan-200 drop-shadow-lg px-4 py-0.5 rounded-lg hover:bg-cyan-400">
+                          S'inscrire
+                        </button>
                       </div>
                     </div>
-                    
                   </div>
                 </div>
-                
               </div>
             </div>
           </div>
