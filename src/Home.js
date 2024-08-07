@@ -162,7 +162,7 @@ function Home({ user, isLoadingUser }) {
                   <option value="expert">Expert</option>
                 </select>
               </div>
-              <div className="flex flex-col text-lg justify-center align-bottom mt-24 h-auto">
+              <div className="flex flex-col text-lg justify-center align-bottom mt-20 h-auto">
                 <p>Credits</p>
                 <p>Conditions d'utilisation</p>
                 <p>Contacts</p>
