@@ -48,7 +48,7 @@ function Profile({ user }) {
           <div className="flex flex-col">
             <div className="flex justify-center">
               <img
-                src={`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`}
+                src={`https://cdn.discordapp.com/avatars/${user.discordId}/${user.avatar}.png`}
                 alt="Discord Profile"
                 className="flex justify-center rounded-full size-72 border-2 border-black"
               />
@@ -61,7 +61,7 @@ function Profile({ user }) {
                 data-tooltip-id="discordId"
                 data-tooltip-content={tooltipText}
               >
-                Discord Id : {user.id}
+                Discord Id : {user.discordId}
               </span>
               <Tooltip id="discordId" place="bottom" />
               <p>Sessions Organisées : </p>

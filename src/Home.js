@@ -55,19 +55,37 @@ function Home({ user, isLoadingUser }) {
   };
 
   return (
-    <div className= {theme === "light" ? "bg-white text-black" : "bg-[#1E1E1E] text-white"}>
+    <div
+      className={
+        theme === "light" ? "bg-white text-black" : "bg-[#1E1E1E] text-white"
+      }
+    >
       <header id="App-Header" className="flex flex-row justify-evenly">
-        <p className={`text-xl mt-7 ml-8 mr-4 ${theme === "light" ? "text-black" : "text-white"}`}>
+        <p
+          className={`text-xl mt-7 ml-8 mr-4 ${
+            theme === "light" ? "text-black" : "text-white"
+          }`}
+        >
           NaetorUSmash
         </p>
-        <div className={`flex flex-row w-7/12 rounded-xl pl-2 mt-5 ${theme === "light" ? "bg-gray-300 text-black" : "bg-[#848484] text-white"}`}>
+        <div
+          className={`flex flex-row w-7/12 rounded-xl pl-2 mt-5 ${
+            theme === "light"
+              ? "bg-gray-300 text-black"
+              : "bg-[#848484] text-white"
+          }`}
+        >
           <button type="submit" className="size-8 mt-1 pr-3">
             <img src={searchico} alt="search icon" />
           </button>
           <input
             type="text"
             placeholder="Recherche par joueurs / régions"
-            className={`rounded-xl h-10 w-full pl-2  ${theme === "light" ? "bg-gray-300 text-black placeholder-gray-500" : "bg-[#848484] text-white placeholder-white"}`}
+            className={`rounded-xl h-10 w-full pl-2  ${
+              theme === "light"
+                ? "bg-gray-300 text-black placeholder-gray-500"
+                : "bg-[#848484] text-white placeholder-white"
+            }`}
           />
         </div>
         <button onClick={toggleTheme} className="flex items-center">
@@ -84,7 +102,7 @@ function Home({ user, isLoadingUser }) {
                 data-tooltip-content="Accedez à votre profil"
               >
                 <img
-                  src={`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`}
+                  src={`https://cdn.discordapp.com/avatars/${user.discordId}/${user.avatar}.png`}
                   alt="Discord Profile"
                   className="rounded-full w-10 h-10"
                 />
@@ -94,7 +112,11 @@ function Home({ user, isLoadingUser }) {
           ) : (
             <button
               onClick={handleLogin}
-              className={`px-7 rounded-xl drop-shadow-lg mt-5 ml-20  h-11 ${theme === "light" ? "bg-gray-200 hover:bg-gray-300" : "bg-[#848484] hover:bg-gray-600"}`}
+              className={`px-7 rounded-xl drop-shadow-lg mt-5 ml-20  h-11 ${
+                theme === "light"
+                  ? "bg-gray-200 hover:bg-gray-300"
+                  : "bg-[#848484] hover:bg-gray-600"
+              }`}
             >
               Se Connecter
             </button>
@@ -111,7 +133,11 @@ function Home({ user, isLoadingUser }) {
                 <p>Jeu</p>
                 <select
                   name="jeu"
-                  className={`rounded-lg p-3 w-full ${theme === "light" ? "bg-gray-200 hover:bg-gray-300" : "bg-[#848484] hover:bg-gray-600"}`}
+                  className={`rounded-lg p-3 w-full ${
+                    theme === "light"
+                      ? "bg-gray-200 hover:bg-gray-300"
+                      : "bg-[#848484] hover:bg-gray-600"
+                  }`}
                 >
                   <option value="ultimate">Smash Ultimate</option>
                   <option value="hdr">Smash HDR</option>
@@ -121,7 +147,11 @@ function Home({ user, isLoadingUser }) {
                 </select>
               </div>
               <div>
-                <div className={`flex flex-row space-x-1 ${theme === "dark" ? "text-white" : "text-black"}`}>
+                <div
+                  className={`flex flex-row space-x-1 ${
+                    theme === "dark" ? "text-white" : "text-black"
+                  }`}
+                >
                   <p>Distance :</p>
                   <output>{distance} km</output>
                 </div>
@@ -132,9 +162,17 @@ function Home({ user, isLoadingUser }) {
                     max="100"
                     value={distance}
                     onChange={handleDistanceChange}
-                    className={`w-full ${theme === "light" ? "bg-white accent-blue" : "bg-[#848484] accent-[#848484]"}`}
+                    className={`w-full ${
+                      theme === "light"
+                        ? "bg-white accent-blue"
+                        : "bg-[#848484] accent-[#848484]"
+                    }`}
                   />
-                  <div className={`flex flex-row justify-between ${theme === "light" ? "text-black" : "text-white"}`}>
+                  <div
+                    className={`flex flex-row justify-between ${
+                      theme === "light" ? "text-black" : "text-white"
+                    }`}
+                  >
                     <p>0 km</p>
                     <p>100 km</p>
                   </div>
@@ -148,14 +186,22 @@ function Home({ user, isLoadingUser }) {
                 <p>Horaire</p>
                 <input
                   type="datetime-local"
-                  className={`rounded-lg p-3 w-full ${theme === "light" ? "bg-gray-200 hover:bg-gray-300" : "bg-[#848484] hover:bg-gray-600"}`}
+                  className={`rounded-lg p-3 w-full ${
+                    theme === "light"
+                      ? "bg-gray-200 hover:bg-gray-300"
+                      : "bg-[#848484] hover:bg-gray-600"
+                  }`}
                 ></input>
               </div>
               <div>
                 <p>Niveau</p>
                 <select
                   name="niveau"
-                  className={`rounded-lg p-3 w-full  ${theme === "light" ? "bg-gray-200 hover:bg-gray-300" : "bg-[#848484] hover:bg-gray-600"}`}
+                  className={`rounded-lg p-3 w-full  ${
+                    theme === "light"
+                      ? "bg-gray-200 hover:bg-gray-300"
+                      : "bg-[#848484] hover:bg-gray-600"
+                  }`}
                 >
                   <option value="debutant">Débutant</option>
                   <option value="intermediaire">Intermédiaire</option>
@@ -174,12 +220,24 @@ function Home({ user, isLoadingUser }) {
             <div className="flex flex-col w-full">
               <div className="flex flex-row justify-between w-full">
                 <p className="text-lg mr-10">Sessions proches de chez moi</p>
-                <button className={`px-7 rounded-xl drop-shadow-lg  ${theme === "light" ? "bg-gray-200 hover:bg-gray-300" : "bg-[#848484] hover:bg-gray-600"}`}>
+                <button
+                  className={`px-7 rounded-xl drop-shadow-lg  ${
+                    theme === "light"
+                      ? "bg-gray-200 hover:bg-gray-300"
+                      : "bg-[#848484] hover:bg-gray-600"
+                  }`}
+                >
                   <Link to="/create">Créer une session</Link>
                 </button>
               </div>
               <div className="flex ml-20 h-auto w-full flex-row flex-wrap">
-                <div className={`rounded-xl mt-14 mr-4 h-56 w-96 drop-shadow-lg ${theme === "light" ? "bg-gray-200 hover:bg-gray-300" : "bg-[#848484] hover:bg-gray-600"}`}>
+                <div
+                  className={`rounded-xl mt-14 mr-4 h-56 w-96 drop-shadow-lg ${
+                    theme === "light"
+                      ? "bg-gray-200 hover:bg-gray-300"
+                      : "bg-[#848484] hover:bg-gray-600"
+                  }`}
+                >
                   <div className="ml-4">
                     <div className="mt-2">
                       {/*PFP */}
@@ -196,7 +254,9 @@ function Home({ user, isLoadingUser }) {
                         <p className="font-semibold w-auto whitespace-nowrap mr-2">
                           Adresse :
                         </p>
-                        <p>2 Rue Paul Vaillant Couturier, 92300 Levallois-Perret</p>
+                        <p>
+                          2 Rue Paul Vaillant Couturier, 92300 Levallois-Perret
+                        </p>
                       </div>
                       <div className="flex flex-row mb-1 leading-tight">
                         <p className="font-semibold w-auto whitespace-nowrap mr-2">
@@ -206,7 +266,11 @@ function Home({ user, isLoadingUser }) {
                       </div>
                     </div>
                     <div className="flex flex-row mt-3 ml-3">
-                      <img className="w-6 h-6" src={google_maps} alt="Google Maps" />
+                      <img
+                        className="w-6 h-6"
+                        src={google_maps}
+                        alt="Google Maps"
+                      />
                       <p>Ouvrir dans google map</p>
                       <div className="w-auto mt-1 ml-8">
                         <button className="bg-cyan-200 drop-shadow-lg px-4 py-0.5 rounded-lg hover:bg-cyan-400">
