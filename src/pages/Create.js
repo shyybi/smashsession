@@ -1,6 +1,6 @@
-import "./App.css";
+import "../App.css";
 
-function Create () {
+function Create() {
   return (
     <div className="flex flex-col">
       <header>
@@ -32,7 +32,6 @@ function Create () {
             <p>Description :</p>
             <textarea placeholder="aa"></textarea>
           </div>
-          
         </div>
       </div>
     </div>

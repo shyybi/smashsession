@@ -1,16 +1,16 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { Tooltip } from "react-tooltip";
 import { Link, useNavigate } from "react-router-dom";
-import sun from "./Assets/sun.svg";
-import moon from "./Assets/moon.svg";
-import google_maps from "./Assets/google_map.svg";
-import searchico from "./Assets/search-interface-symbol.png";
-import { useTheme } from "./common/ThemeContext";
-import "./App.css";
+import sun from "../Assets/sun.svg";
+import moon from "../Assets/moon.svg";
+import google_maps from "../Assets/google_map.svg";
+import searchico from "../Assets/search-interface-symbol.png";
+import { useTheme } from "../common/ThemeContext";
+import "../App.css";
 import axios from "axios";
-import { attachToken, publicAxios } from "./api/privateAxiosInstance";
+import { attachToken, publicAxios } from "../api/privateAxiosInstance";
 import { useQueryClient } from "@tanstack/react-query";
-import { usersQueryKeys } from "./api/query-keys/users.query-keys";
+import { usersQueryKeys } from "../api/query-keys/users.query-keys";
 import { Loader } from "@mantine/core";
 
 function Home({ user, isLoadingUser }) {
@@ -106,7 +106,7 @@ function Home({ user, isLoadingUser }) {
                   alt="Discord Profile"
                   className="rounded-full w-10 h-10"
                 />
-                <span className="mt-2 mr-2">{user.global_name}</span>
+                <span className="mt-2 mr-2">{user?.global_name}</span>
               </div>
             </Link>
           ) : (
