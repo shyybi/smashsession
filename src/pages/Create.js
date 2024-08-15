@@ -1,40 +1,58 @@
+import { Button, Container, Flex, Stack, Title } from "@mantine/core";
 import "../App.css";
+import TextInputRhf from "../components/forms/TextInputRhf";
+import { useForm } from "react-hook-form";
+import TextareaRhf from "../components/forms/TextareaRhf";
+import DateTimePickerRhf from "../components/forms/DateTimePickerRhf";
+import { useNavigate } from "react-router-dom";
 
 function Create() {
+  const { control } = useForm({
+    defaultValues: {
+      title: "Titre",
+      description: "el",
+      startAt: new Date(),
+    },
+  });
+
+  const navigate = useNavigate();
+
   return (
-    <div className="flex flex-col">
-      <header>
-        <p>NaetorUSmash</p>
-        {/*
-        <div>
-          <img 
-            src={`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`}
-            alt="Discord Profile"
-            className="flex justify-center rounded-full size-72 border-2 border-black"
-          />
-          <p>{user.global_name}</p>
-        </div>
-        */}
-      </header>
-      <div className="flex flex-row w-full justify-center">
-        <div className="flex flex-row w-full justify-center">
-          <div className="flex justify-start w-auto">
-            <button>Annuler</button>
-          </div>
-          <div className="flex justify-center w-auto">
-            <p>Créer une session</p>
-          </div>
-          <div>
-            <p>Titre :</p>
-            <input type="text" placeholder="aa"></input>
-          </div>
-          <div>
-            <p>Description :</p>
-            <textarea placeholder="aa"></textarea>
-          </div>
-        </div>
-      </div>
-    </div>
+    <Container>
+      <Stack align="stretch">
+        <Title order={1} align="center">
+          Créer une session
+        </Title>
+        <TextInputRhf
+          control={control}
+          name="title"
+          label="Titre"
+          placeholder="Titre de la session"
+        />
+        <TextareaRhf
+          control={control}
+          name="description"
+          label="Description"
+          placeholder="Description de la session"
+          autosize
+          minRows={4}
+          maxRows={10}
+        />
+        <DateTimePickerRhf
+          control={control}
+          name="startAt"
+          label="Date et heure de début"
+        />
+        <Flex gap={24}>
+          <Button flex={1} onClick={() => navigate(-1)} variant="outline">
+            Annuler
+          </Button>
+          <Button flex={1} type="submit" disabled>
+            Créer une session
+          </Button>
+        </Flex>
+      </Stack>
+    </Container>
   );
 }
 export default Create;

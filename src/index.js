@@ -4,6 +4,7 @@ import App from './App';
 import { ThemeProvider } from './common/ThemeContext'; // Assurez-vous du bon chemin
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "@mantine/core/styles.css";
+import "@mantine/dates/styles.css";
 import { MantineProvider } from "@mantine/core";
 
 const queryClient = new QueryClient();
