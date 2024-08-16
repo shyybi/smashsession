@@ -6,6 +6,7 @@ import TextareaRhf from "../components/forms/TextareaRhf";
 import DateTimePickerRhf from "../components/forms/DateTimePickerRhf";
 import { useNavigate } from "react-router-dom";
 import AddressInputRhf from "../components/forms/AddressInputRhf";
+import NumberInputRhf from "../components/forms/NumberInputRhf";
 
 function Create() {
   const { control } = useForm({
@@ -14,6 +15,7 @@ function Create() {
       description: "el",
       startAt: new Date(),
       address: null,
+      seatsCount: 0,
     },
   });
 
@@ -46,6 +48,11 @@ function Create() {
           label="Date et heure de début"
         />
         <AddressInputRhf control={control} name="address" label="Adresse" />
+        <NumberInputRhf
+          control={control}
+          name="seatsCount"
+          label="Capacité d'accueil"
+        />
         <Flex gap={24}>
           <Button flex={1} onClick={() => navigate(-1)} variant="outline">
             Annuler
