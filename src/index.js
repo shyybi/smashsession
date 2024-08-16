@@ -4,8 +4,10 @@ import { ThemeProvider } from "./common/ThemeContext"; // Assurez-vous du bon ch
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "@mantine/core/styles.css";
 import "@mantine/dates/styles.css";
+import "@mantine/notifications/styles.css";
 import { MantineProvider } from "@mantine/core";
 import { createRoot } from "react-dom/client";
+import { Notifications } from "@mantine/notifications";
 
 const queryClient = new QueryClient();
 
@@ -17,6 +19,7 @@ root.render(
     <QueryClientProvider client={queryClient}>
       <MantineProvider>
         <ThemeProvider>
+          <Notifications />
           <App />
         </ThemeProvider>
       </MantineProvider>
