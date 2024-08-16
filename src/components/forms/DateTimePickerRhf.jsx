@@ -3,11 +3,12 @@ import { DateTimePicker } from "@mantine/dates";
 import { IconClock } from "@tabler/icons-react";
 
 const DateTimePickerRhf = (props) => {
-  const { control, name } = props;
+  const { control, name, rules, ...restProps } = props;
 
   const { field } = useController({
     name,
     control,
+    rules,
   });
   const { value, onChange } = field;
 
@@ -16,7 +17,7 @@ const DateTimePickerRhf = (props) => {
       leftSection={<IconClock color="black" size="1.2rem" />}
       value={value}
       onChange={onChange}
-      {...props}
+      {...restProps}
     />
   );
 };

@@ -5,28 +5,11 @@ import { useDebounce } from "../../tools/useDebounce";
 import { useController } from "react-hook-form";
 
 const AddressInput = (props) => {
-  const [search, setSearch] = useState("");
-
-  const debouncedSearch = useDebounce(search);
-
-  const { geocodingResults, isLoading } = useGeocodingSearch(debouncedSearch);
-  const results =
-    geocodingResults?.map((result) => {
-      return {
-        value: result.place_id.toString(),
-        label: result.display_name,
-        latLon: {
-          lat: result.lat,
-          lon: result.lon,
-        },
-      };
-    }) ?? [];
-
-  const { name, control } = props;
-
+  const { name, control, rules, ...restProps } = props;
   const { field } = useController({
     name,
     control,
+    rules,
   });
   const { value, onChange } = field;
 
@@ -47,6 +30,23 @@ const AddressInput = (props) => {
     );
   };
 
+  const [search, setSearch] = useState("");
+
+  const debouncedSearch = useDebounce(search);
+
+  const { geocodingResults, isLoading } = useGeocodingSearch(debouncedSearch);
+  const results =
+    geocodingResults?.map((result) => {
+      return {
+        value: result.place_id.toString(),
+        label: result.display_name,
+        latLon: {
+          lat: result.lat,
+          lon: result.lon,
+        },
+      };
+    }) ?? [];
+
   return (
     <Select
       data={results}
@@ -62,7 +62,7 @@ const AddressInput = (props) => {
       rightSection={isLoading ? <Loader size="xs" /> : null}
       onChange={handleChange}
       value={value ? value.placeId : null}
-      {...props}
+      {...restProps}
     />
   );
 };

@@ -11,14 +11,19 @@ import { useMutation } from "@tanstack/react-query";
 import { createSession } from "../api/mutations/sessions.mutations";
 import { notifications } from "@mantine/notifications";
 
-function Create() {
-  const { control, handleSubmit } = useForm({
+const Create = () => {
+  const navigate = useNavigate();
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     defaultValues: {
       title: "",
       description: "",
       startAt: new Date(),
       address: null,
-      seatsCount: 0,
+      seatsCount: 1,
     },
   });
 
@@ -31,6 +36,13 @@ function Create() {
         color: "green",
       });
       navigate(-1);
+    },
+    onError: (error) => {
+      notifications.show({
+        title: "Une erreur s'est produite",
+        message: error.response.data.message,
+        color: "red",
+      });
     },
   });
 
@@ -48,9 +60,6 @@ function Create() {
       });
     })();
   };
-
-  const navigate = useNavigate();
-
   return (
     <Container>
       <Stack align="stretch">
@@ -63,6 +72,8 @@ function Create() {
           label="Titre"
           placeholder="Titre de la session"
           required
+          rules={{ required: "Le titre est obligatoire" }}
+          error={errors.title?.message}
         />
         <TextareaRhf
           control={control}
@@ -73,12 +84,16 @@ function Create() {
           minRows={4}
           maxRows={10}
           required
+          rules={{ required: "La description est obligatoire" }}
+          error={errors.description?.message}
         />
         <DateTimePickerRhf
           control={control}
           name="startAt"
           label="Date et heure de début"
           required
+          rules={{ required: "La date et l'heure de début sont obligatoires" }}
+          error={errors.startAt?.message}
         />
         <AddressInputRhf
           control={control}
@@ -86,14 +101,21 @@ function Create() {
           label="Adresse"
           clearable
           required
+          rules={{ required: "L'adresse est obligatoire" }}
+          error={errors.address?.message}
         />
         <NumberInputRhf
           control={control}
           name="seatsCount"
           label="Capacité d'accueil"
           required
+          min={1}
+          rules={{
+            required: "La capacité d'accueil est obligatoire",
+          }}
+          error={errors.seatsCount?.message}
         />
-        <Flex gap={24}>
+        <Flex gap="xs">
           <Button flex={1} onClick={() => navigate(-1)} variant="outline">
             Annuler
           </Button>
@@ -110,5 +132,6 @@ function Create() {
       </Stack>
     </Container>
   );
-}
+};
+
 export default Create;
