@@ -2,14 +2,14 @@ import { useState } from "react";
 import { useGeocodingSearch } from "../../api/hooks/geocoding.hooks";
 import { Loader, Select } from "@mantine/core";
 import { useDebounce } from "../../tools/useDebounce";
+import { useController } from "react-hook-form";
 
-const AddressInput = () => {
+const AddressInput = (props) => {
   const [search, setSearch] = useState("");
 
-  const debouncedSearch = useDebounce(search, 500);
+  const debouncedSearch = useDebounce(search);
 
   const { geocodingResults, isLoading } = useGeocodingSearch(debouncedSearch);
-
   const results =
     geocodingResults?.map((result) => {
       return {
@@ -21,6 +21,31 @@ const AddressInput = () => {
         },
       };
     }) ?? [];
+
+  const { name, control } = props;
+
+  const { field } = useController({
+    name,
+    control,
+  });
+  const { value, onChange } = field;
+
+  const handleChange = (placeId) => {
+    if (placeId === null) {
+      onChange(null);
+    }
+    const addessSelected = results.find((result) => result.value === placeId);
+    onChange(
+      addessSelected
+        ? {
+            placeId,
+            label: addessSelected.label,
+            lat: addessSelected.latLon.lat,
+            lon: addessSelected.latLon.lon,
+          }
+        : null
+    );
+  };
 
   return (
     <Select
@@ -35,6 +60,9 @@ const AddressInput = () => {
         setSearch(value);
       }}
       rightSection={isLoading ? <Loader size="xs" /> : null}
+      onChange={handleChange}
+      value={value ? value.placeId : null}
+      {...props}
     />
   );
 };

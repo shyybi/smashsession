@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import TextareaRhf from "../components/forms/TextareaRhf";
 import DateTimePickerRhf from "../components/forms/DateTimePickerRhf";
 import { useNavigate } from "react-router-dom";
-import AddressInput from "../components/inputs/AddressInput";
+import AddressInputRhf from "../components/forms/AddressInputRhf";
 
 function Create() {
   const { control } = useForm({
@@ -13,6 +13,7 @@ function Create() {
       title: "Titre",
       description: "el",
       startAt: new Date(),
+      address: null,
     },
   });
 
@@ -44,7 +45,7 @@ function Create() {
           name="startAt"
           label="Date et heure de début"
         />
-        <AddressInput />
+        <AddressInputRhf control={control} name="address" label="Adresse" />
         <Flex gap={24}>
           <Button flex={1} onClick={() => navigate(-1)} variant="outline">
             Annuler
