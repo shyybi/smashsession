@@ -1,6 +1,6 @@
 import { Container, Skeleton, Stack } from "@mantine/core";
 import { useMySessions } from "../../api/hooks/sessions.hooks";
-import SessionCard from "./SessionCard";
+import MySessionCard from "./MySessionCard";
 
 const MySessionsList = () => {
   const { mySessions, isLoading } = useMySessions();
@@ -21,7 +21,7 @@ const MySessionsList = () => {
     <Container>
       <Stack mt="16px">
         {mySessions.map((session) => (
-          <SessionCard session={session} key={session.id} />
+          <MySessionCard session={session} key={session.id} />
         ))}
       </Stack>
     </Container>

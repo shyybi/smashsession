@@ -1680,6 +1680,11 @@
   resolved "https://registry.npmjs.org/@mantine/hooks/-/hooks-7.12.1.tgz"
   integrity sha512-YPA3qiMHJkWID5+YzakBaLvjHtX3Fg3PdPY49iIb/CaWM9+lrJ+77TOVS7bsY7ZTBHXUfzft1/6Woqt3xSuweA==
 
+"@mantine/modals@^7.12.1":
+  version "7.12.1"
+  resolved "https://registry.npmjs.org/@mantine/modals/-/modals-7.12.1.tgz"
+  integrity sha512-olS07yDcCFLGylLGaQgBiTnKcRrUZVLKqBFBw5glcmc/wZmJf4SDMgx5mxSwBnsbJOwJ2d3aIYwO/qNTNnluSg==
+
 "@mantine/notifications@^7.12.1":
   version "7.12.1"
   resolved "https://registry.npmjs.org/@mantine/notifications/-/notifications-7.12.1.tgz"
