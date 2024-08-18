@@ -3,7 +3,6 @@ import { Tooltip } from "react-tooltip";
 import { Link, useNavigate } from "react-router-dom";
 import sun from "../Assets/sun.svg";
 import moon from "../Assets/moon.svg";
-import google_maps from "../Assets/google_map.svg";
 import searchico from "../Assets/search-interface-symbol.png";
 import { useTheme } from "../common/ThemeContext";
 import "../App.css";
@@ -12,6 +11,7 @@ import { attachToken, publicAxios } from "../api/privateAxiosInstance";
 import { useQueryClient } from "@tanstack/react-query";
 import { usersQueryKeys } from "../api/query-keys/users.query-keys";
 import { Loader } from "@mantine/core";
+import SessionsList from "../components/sessions/SessionsList";
 
 function Home({ user, isLoadingUser }) {
   const { theme, toggleTheme } = useTheme();
@@ -218,7 +218,7 @@ function Home({ user, isLoadingUser }) {
           {/* Separation */}
           <div className="flex flex-col ml-10 w-10/12">
             <div className="flex flex-col w-full">
-              <div className="flex flex-row justify-between w-full">
+              <div className="flex flex-row justify-between w-full mb-10">
                 <p className="text-lg mr-10">Sessions proches de chez moi</p>
                 <button
                   className={`px-7 rounded-xl drop-shadow-lg  ${
@@ -230,57 +230,7 @@ function Home({ user, isLoadingUser }) {
                   <Link to="/create">Créer une session</Link>
                 </button>
               </div>
-              <div className="flex ml-20 h-auto w-full flex-row flex-wrap">
-                <div
-                  className={`rounded-xl mt-14 mr-4 h-56 w-96 drop-shadow-lg ${
-                    theme === "light"
-                      ? "bg-gray-200 hover:bg-gray-300"
-                      : "bg-[#848484] hover:bg-gray-600"
-                  }`}
-                >
-                  <div className="ml-4">
-                    <div className="mt-2">
-                      {/*PFP */}
-                      <p className="font-bold m-6">Neeroz</p>
-                    </div>
-                    <div className="mt-3">
-                      <div className="flex flex-row mb-1 leading-tight">
-                        <p className="font-semibold w-auto whitespace-nowrap mr-2">
-                          Date et heure :
-                        </p>
-                        <p>3 Aout 2024 | 14h à 18h</p>
-                      </div>
-                      <div className="flex flex-row mb-1 leading-tight">
-                        <p className="font-semibold w-auto whitespace-nowrap mr-2">
-                          Adresse :
-                        </p>
-                        <p>
-                          2 Rue Paul Vaillant Couturier, 92300 Levallois-Perret
-                        </p>
-                      </div>
-                      <div className="flex flex-row mb-1 leading-tight">
-                        <p className="font-semibold w-auto whitespace-nowrap mr-2">
-                          Particpants :
-                        </p>
-                        <p>3/6</p>
-                      </div>
-                    </div>
-                    <div className="flex flex-row mt-3 ml-3">
-                      <img
-                        className="w-6 h-6"
-                        src={google_maps}
-                        alt="Google Maps"
-                      />
-                      <p>Ouvrir dans google map</p>
-                      <div className="w-auto mt-1 ml-8">
-                        <button className="bg-cyan-200 drop-shadow-lg px-4 py-0.5 rounded-lg hover:bg-cyan-400">
-                          S'inscrire
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <SessionsList />
             </div>
           </div>
         </div>
