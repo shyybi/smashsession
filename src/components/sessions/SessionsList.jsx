@@ -4,8 +4,10 @@ import { notifications } from "@mantine/notifications";
 import { Button, Flex, Grid, Loader, Paper, Text, Title } from "@mantine/core";
 import { format } from "date-fns";
 import google_maps from "../../Assets/google_map.svg";
+import { useTheme } from "../../common/ThemeContext";
 
 const SessionsList = () => {
+  
   function getPositionSuccess(pos) {
     var crd = pos.coords;
     setLatLon({ lat: crd.latitude, lon: crd.longitude });
@@ -14,13 +16,14 @@ const SessionsList = () => {
   function getPositionError(err) {
     console.warn(`ERROR(${err.code}): ${err.message}`);
   }
-
+  const { theme, toggleTheme } = useTheme();
   const [latLon, setLatLon] = useState({
     lat: null,
     lon: null,
   });
 
   useEffect(() => {
+  
     var options = {
       enableHighAccuracy: true,
       timeout: 5000,
@@ -67,6 +70,9 @@ const SessionsList = () => {
   }, []);
 
   const { sessions, isLoading } = useSessions(latLon.lat, latLon.lon);
+  
+
+
 
   if (isLoading) {
     return <Loader color="red" size="xs" />;
@@ -76,11 +82,28 @@ const SessionsList = () => {
     return <Text>Aucune session à afficher</Text>;
   }
 
+  let background
+  if (theme === "light") {
+    background = "#e5e7eb"
+  } 
+  else if (theme === "dark") {
+    background = "#848484"
+  }
+
+  let googletxt
+  if (theme === "light") {
+    googletxt = "blue"
+  } 
+  else if (theme === "dark") {
+    googletxt = "#91e4ff"
+  }
+
   return (
-    <Grid>
+    
+    <Grid >
       {sessions.map((session) => (
-        <Grid.Col key={session.id} span={6}>
-          <Paper p="md" radius="md" shadow="xs" bg="gray.1">
+        <Grid.Col key={session.id} span={6} >
+          <Paper p="md" radius="md" shadow="xs" bg={background} >
             <Title order={4} mb="md">
               {session.title}
             </Title>
@@ -107,6 +130,7 @@ const SessionsList = () => {
                 variant="transparent"
                 pl={0}
                 pr={0}
+                color={googletxt}
                 onClick={() => {
                   window.open(
                     `https://www.google.com/maps/search/?api=1&query=${session.address?.latitude},${session.address?.longitude}`,
@@ -117,7 +141,7 @@ const SessionsList = () => {
                 <img className="w-6 h-6" src={google_maps} alt="Google Maps" />
                 Ouvrir dans google maps
               </Button>
-              <Button variant="outline" color="green" disabled>
+              <Button variant="outline" color="green" enabled>
                 S'inscrire
               </Button>
             </Flex>

@@ -6,6 +6,7 @@ import { deleteSession } from "../../api/mutations/sessions.mutations";
 import { notifications } from "@mantine/notifications";
 import { modals } from "@mantine/modals";
 import { sessionsQueryKeys } from "../../api/query-keys/sessions.query-keys";
+import { useTheme } from "../../common/ThemeContext";
 
 const SessionCard = ({ session }) => {
   const queryClient = useQueryClient();
@@ -36,10 +37,19 @@ const SessionCard = ({ session }) => {
     });
   };
 
+  const { theme, toggleTheme } = useTheme();
+
+  let background
+  if (theme === "light") {
+    background = "white"
+  } 
+  else if (theme === "dark") {
+    background = "#1E1E1E"
+  }
   return (
-    <Paper p="md" radius="md" withBorder>
+    <Paper p="md" radius="md" bg={background} withBorder >
       <Flex align="center" justify="space-between">
-        <Stack>
+        <Stack >
           <Title order={4}>{session.title}</Title>
           <p>{session.description}</p>
           <p>{session.address?.displayName ?? ""}</p>

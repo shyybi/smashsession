@@ -25,17 +25,34 @@ function Profile({ user }) {
 
   return (
     <div>
-      <header className="flex flex-row justify-evenly space-x-2">
-        <p>NaetorUSmash</p>
-        <div>
-          <Link to="/">Accueil</Link>
+      <header className="flex flex-row justify-between space-x-2 ">
+        <div className="mt-5 flex flex-row w-full">
+          <div className="flex flex-row w-full justify-around ">
+            <div className="flex">
+              <Link to="/" className="text-xl items-center">SmashWith.Me</Link>
+            </div>
+            <div className="flex items-center">
+              <Link to="/" className="text-lg">Accueil</Link>  
+            </div>
+          </div>
+          {/* Icône de changement de thème */}
+          <div className="flex w-72"><a></a></div>
+          <div className="flex flex-row w-full justify-around">
+            <div className="flex items-center">
+              <button onClick={toggleTheme} className="flex items-center">
+                <img src={themeIcon} alt="Theme icon" className="size-8" />
+              </button>
+            </div>
+            <div className="flex items-center">
+              <button onClick={Logout} className="text-lg">Se déconnecter</button>
+            </div>
+          </div>
         </div>
-        {/* Icône de changement de thème */}
-        <button onClick={toggleTheme} className="flex items-center">
-          <img src={themeIcon} alt="Theme icon" className="size-8" />
-        </button>
-        <button onClick={Logout}>Se déconnecter</button>
       </header>
+
+
+
+
       <Stack>
         <div className="flex justify-center">
           <img
@@ -45,10 +62,12 @@ function Profile({ user }) {
           />
         </div>
         <Tabs defaultValue="my-sessions">
+          
           <Tabs.List justify="center">
-            <Tabs.Tab value="details">Informations personnelles</Tabs.Tab>
-            <Tabs.Tab value="my-sessions">Sessions créées</Tabs.Tab>
+            <Tabs.Tab value="details" className={theme === "light" ? "hover:bg-white text-black" : "hover:bg-[#1E1E1E] text-white"}>Informations personnelles</Tabs.Tab>
+            <Tabs.Tab value="my-sessions" className={theme === "light" ? "hover:bg-white text-black" : "hover:bg-[#1E1E1E] text-white"} >Sessions créées</Tabs.Tab>
           </Tabs.List>
+          
           <Tabs.Panel value="details">
             <UserInfos user={user} />
           </Tabs.Panel>

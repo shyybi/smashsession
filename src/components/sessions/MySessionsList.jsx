@@ -1,5 +1,6 @@
 import { Container, Skeleton, Stack } from "@mantine/core";
 import { useMySessions } from "../../api/hooks/sessions.hooks";
+import { useTheme } from "../../common/ThemeContext";
 import MySessionCard from "./MySessionCard";
 
 const MySessionsList = () => {

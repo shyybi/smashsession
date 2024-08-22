@@ -52,6 +52,7 @@ function Home({ user, isLoadingUser }) {
 
   const handleDistanceChange = (event) => {
     setDistance(event.target.value);
+    
   };
 
   return (
@@ -61,13 +62,14 @@ function Home({ user, isLoadingUser }) {
       }
     >
       <header id="App-Header" className="flex flex-row justify-evenly">
-        <p
+        <Link 
+          to="/"
           className={`text-xl mt-7 ml-8 mr-4 ${
             theme === "light" ? "text-black" : "text-white"
           }`}
         >
-          NaetorUSmash
-        </p>
+          SmashWith.Me
+        </Link>
         <div
           className={`flex flex-row w-7/12 rounded-xl pl-2 mt-5 ${
             theme === "light"
@@ -91,7 +93,7 @@ function Home({ user, isLoadingUser }) {
         <button onClick={toggleTheme} className="flex items-center">
           <img src={themeIcon} alt="Theme icon" className="size-8 mt-6 mr-5" />
         </button>
-        <div className="flex flex-row items-center">
+        <div className="flex flex-row items-end h-auto">
           {isLoadingUser && hasLocalStorageAccessToken ? (
             <Loader color="black" size="xs" />
           ) : user ? (
@@ -165,7 +167,7 @@ function Home({ user, isLoadingUser }) {
                     className={`w-full ${
                       theme === "light"
                         ? "bg-white accent-blue"
-                        : "bg-[#848484] accent-[#848484]"
+                        : "bg-[#848484] accent-[#91e4ff]"
                     }`}
                   />
                   <div
