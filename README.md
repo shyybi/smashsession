@@ -1,9 +1,13 @@
 Tailwinds CSS documentation : 
+
 https://tailwindcss.com/
+
 ReactJs documentation : 
+
 https://react.dev/
 
 Here is the Back-End Repository :
+
 https://github.com/IgenFlo/smash-in-paris-backend
 
 Credits : 
