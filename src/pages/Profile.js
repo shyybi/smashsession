@@ -50,21 +50,23 @@ function Profile({ user }) {
         </div>
       </header>
 
-
-
-
       <Stack>
-        <div className="flex justify-center">
+        <div className="flex flex-col items-center justify-center">
           <img
-            src={`https://cdn.discordapp.com/avatars/${user?.discordId}/${user?.avatar}.png`}
+            src={
+              user?.avatar
+                ? `https://cdn.discordapp.com/avatars/${user?.id || user?.discordId}/${user?.avatar}.png`
+                : `https://cdn.discordapp.com/embed/avatars/0.png`
+            }
             alt="Discord Profile"
-            className="flex justify-center rounded-full size-56 border-2 border-black"
+            className="rounded-full size-56 border-2 border-black"
           />
+          <p className="mt-2">{user?.global_name}</p>
         </div>
+        
         <Tabs defaultValue="my-sessions">
-          
           <Tabs.List justify="center">
-            <Tabs.Tab value="details" className={theme === "light" ? "hover:bg-white text-black" : "hover:bg-[#1E1E1E] text-white"}>Informations personnelles</Tabs.Tab>
+            <Tabs.Tab value="details" className={theme === "light" ? "hover:bg-white text-black" : "hover:bg-[#1E1E1E] text-white"}>Informations</Tabs.Tab>
             <Tabs.Tab value="my-sessions" className={theme === "light" ? "hover:bg-white text-black" : "hover:bg-[#1E1E1E] text-white"} >Sessions créées</Tabs.Tab>
           </Tabs.List>
           

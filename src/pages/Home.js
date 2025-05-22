@@ -33,12 +33,13 @@ function Home({ user, isLoadingUser }) {
       localStorage.setItem("accessToken", data);
       attachToken(data);
       navigate("/");
+      await queryClient.invalidateQueries(usersQueryKeys.me());
     } else {
       if (localStorage.getItem("accessToken")) {
         attachToken(localStorage.getItem("accessToken"));
       }
+      await queryClient.invalidateQueries(usersQueryKeys.me());
     }
-    queryClient.refetchQueries(usersQueryKeys.me());
   }, [navigate, queryClient]);
 
   useEffect(() => {
@@ -104,7 +105,11 @@ function Home({ user, isLoadingUser }) {
                 data-tooltip-content="Accedez à votre profil"
               >
                 <img
-                  src={`https://cdn.discordapp.com/avatars/${user.discordId}/${user.avatar}.png`}
+                  src={
+                    user.avatar
+                      ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`
+                      : `https://cdn.discordapp.com/embed/avatars/0.png`
+                  }
                   alt="Discord Profile"
                   className="rounded-full w-10 h-10"
                 />

@@ -117,7 +117,11 @@ const Create = ({ user, isLoadingUser }) => {
                     data-tooltip-content="Accedez à votre profil"
                   >
                     <img
-                      src={`https://cdn.discordapp.com/avatars/${user.discordId}/${user.avatar}.png`}
+                      src={
+                        user?.avatar
+                          ? `https://cdn.discordapp.com/avatars/${user?.id || user?.discordId}/${user?.avatar}.png`
+                          : `https://cdn.discordapp.com/embed/avatars/0.png`
+                      }
                       alt="Discord Profile"
                       className="rounded-full w-10 h-10"
                     />

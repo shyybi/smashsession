@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Profile from "./pages/Profile";
 import Home from "./pages/Home";
 import Create from "./pages/Create";
+import Callback from "./pages/Callback";
 import { useTheme } from "./common/ThemeContext";
 import { useMe } from "./api/hooks/users.hooks";
 import { attachToken } from "./api/privateAxiosInstance";
@@ -41,6 +42,7 @@ function App() {
           />
           <Route path="/profile" element={<Profile user={me} />} />
           <Route path="/create" element={<Create user={me} />} />
+          <Route path="/callback" element={<Callback />} />
         </Routes>
       </div>
     </Router>

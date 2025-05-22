@@ -70,15 +70,15 @@ const SessionsList = () => {
   }, []);
 
   const { sessions, isLoading } = useSessions(latLon.lat, latLon.lon);
-  
 
-
+  // Ensure sessions is always an array to avoid runtime errors
+  const safeSessions = Array.isArray(sessions) ? sessions : [];
 
   if (isLoading) {
     return <Loader color="red" size="xs" />;
   }
 
-  if (sessions && sessions.length === 0) {
+  if (safeSessions.length === 0) {
     return <Text>Aucune session à afficher</Text>;
   }
 
@@ -101,7 +101,7 @@ const SessionsList = () => {
   return (
     
     <Grid >
-      {sessions.map((session) => (
+      {safeSessions.map((session) => (
         <Grid.Col key={session.id} span={6} >
           <Paper p="md" radius="md" shadow="xs" bg={background} >
             <Title order={4} mb="md">
